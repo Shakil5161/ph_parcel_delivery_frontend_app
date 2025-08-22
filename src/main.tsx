@@ -30,7 +30,6 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider>
       <RouterProvider router={router}/>
-      {/* <App /> */}
     </ThemeProvider>
   </StrictMode>,
 )

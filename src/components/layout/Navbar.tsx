@@ -1,4 +1,5 @@
 
+import Logo from "@/assets/icons/Logo"
 import { Button } from "@/components/ui/button"
 import {
   NavigationMenu,
@@ -20,6 +21,7 @@ const navigationLinks = [
   { href: "/about", label: "About" },
   { href: "/contact", label: "Contact" },
 ]
+
 
 export default function Navbar() {
   return (
@@ -82,7 +84,8 @@ export default function Navbar() {
           {/* Main nav */}
           <div className="flex items-center gap-6">
             <Link to="/" className="text-primary hover:text-primary/90">
-              Logo
+             <Logo />
+             
             </Link>
             {/* Navigation menu */}
             <NavigationMenu className="max-md:hidden">
@@ -104,11 +107,9 @@ export default function Navbar() {
         {/* Right side */}
         <div className="flex items-center gap-2">
           <ModeToggle/>
-          <Button asChild variant="ghost" size="sm" className="text-sm">
-            <a href="#">Sign In</a>
-          </Button>
+          
           <Button asChild size="sm" className="text-sm">
-            <a href="#">Get Started</a>
+            <Link to="/sign-in">Sign In</Link>
           </Button>
         </div>
       </div>

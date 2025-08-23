@@ -7,6 +7,10 @@ import Contact from './components/modules/contact/Contact.tsx'
 import './index.css'
 import { ThemeProvider } from './providers/theme.provider.tsx'
 
+import { Provider as ReduxProvider } from 'react-redux'
+import { store } from './redux/store.ts'
+
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -28,8 +32,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider>
-      <RouterProvider router={router}/>
-    </ThemeProvider>
+    <ReduxProvider store={store}> 
+      <ThemeProvider defaultTheme='dark'>
+        <RouterProvider router={router}/>
+      </ThemeProvider>
+    </ReduxProvider>
   </StrictMode>,
 )

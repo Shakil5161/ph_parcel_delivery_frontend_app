@@ -2,7 +2,9 @@ import App from "@/App";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import About from "@/components/modules/about/About";
 import Contact from "@/components/modules/contact/Contact";
+import Features from "@/components/modules/features/Features";
 import { role } from "@/constants/role";
+import Home from "@/pages/home/Home";
 import Login from "@/pages/Login";
 import Register from "@/pages/Register";
 import Unauthorized from "@/pages/Unauthorized";
@@ -20,6 +22,10 @@ export const router = createBrowserRouter([
         path: "/",
         Component: App,
         children: [
+            { 
+                index: true, 
+                Component: Home 
+            },
             {
                 path: "/about",
                 Component: About
@@ -27,6 +33,10 @@ export const router = createBrowserRouter([
             {
                 path: "/contact",
                 Component: Contact
+            },
+            {
+                path: "/features",
+                Component: Features
             }
         ]
     },

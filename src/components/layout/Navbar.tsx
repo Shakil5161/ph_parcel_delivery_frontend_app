@@ -11,6 +11,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover"
+import { role } from "@/constants/role"
 import { authApi, useLogoutMutation, useUserInfoQuery } from "@/redux/features/auth/auth.api"
 import { useAppDispatch } from "@/redux/hooks"
 import { Link } from "react-router"
@@ -18,10 +19,15 @@ import { ModeToggle } from "./ModeToggler"
 
 // Navigation links array to be used in both desktop and mobile menus
 const navigationLinks = [
-  { href: "/", label: "Home", active: true },
-  { href: "#", label: "Features" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+  { href: "/", label: "Home", role: "PUBLIC"},
+  { href: "#", label: "Features", role: "PUBLIC" },
+  { href: "/about", label: "About", role: "PUBLIC" },
+  { href: "/contact", label: "Contact", role: "PUBLIC" },
+  { href: "/admin", label: "Dashboard", role: role.SUPER_ADMIN },
+  { href: "/admin", label: "Dashboard", role: role.ADMIN },
+  { href: "/user", label: "Dashboard", role: role.SENDERS },
+  { href: "/user", label: "Dashboard", role: role.RECEIVER },
+  { href: "/user", label: "Dashboard", role: role.RIDER },
 ]
 
 
@@ -41,7 +47,7 @@ const handleLogout = async () => {
 
   return (
     <header className="border-b px-4 md:px-6">
-      <div className="flex h-16 items-center justify-between gap-4">
+      <div className="flex h-28 items-center justify-between gap-4">
         {/* Left side */}
         <div className="flex items-center gap-2">
           {/* Mobile menu trigger */}
@@ -81,16 +87,31 @@ const handleLogout = async () => {
             </PopoverTrigger>
             <PopoverContent align="start" className="w-36 p-1 md:hidden">
               <NavigationMenu className="max-w-none *:w-full">
-                <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
+                <NavigationMenuList className="flex-col items-start p-3 gap-3 md:gap-3">
                   {navigationLinks.map((link, index) => (
-                    <NavigationMenuItem key={index} className="w-full">
-                      <Link
-                        to={link.href}
-                        className="py-1.5"
-                      >
-                        {link.label}
-                      </Link>
-                    </NavigationMenuItem>
+                    <>
+                  {link.role === "PUBLIC" && (
+                    <NavigationMenuItem key={index}>
+                    <Link
+                      to={link.href}
+                      className="text-muted-foreground hover:text-primary  py-3 font-medium"
+                    >
+                      {link.label}
+                    </Link>
+                  </NavigationMenuItem>
+                  )}
+                  { link.role === data?.data?.role &&(
+                    <NavigationMenuItem key={index}>
+                    <Link
+                      to={link.href}
+                      className="text-muted-foreground hover:text-primary py-1.5 font-medium"
+                    >
+                      {link.label}
+                    </Link>
+                  </NavigationMenuItem>
+                  )}
+
+                  </>
                   ))}
                 </NavigationMenuList>
               </NavigationMenu>
@@ -106,7 +127,19 @@ const handleLogout = async () => {
             <NavigationMenu className="max-md:hidden">
               <NavigationMenuList className="gap-2">
                 {navigationLinks.map((link, index) => (
-                  <NavigationMenuItem key={index}>
+                  <>
+                  {link.role === "PUBLIC" && (
+                    <NavigationMenuItem key={index}>
+                    <Link
+                      to={link.href}
+                      className="text-muted-foreground hover:text-primary p-3 py-1.5 font-medium"
+                    >
+                      {link.label}
+                    </Link>
+                  </NavigationMenuItem>
+                  )}
+                  { link.role === data?.data?.role &&(
+                    <NavigationMenuItem key={index}>
                     <Link
                       to={link.href}
                       className="text-muted-foreground hover:text-primary py-1.5 font-medium"
@@ -114,6 +147,9 @@ const handleLogout = async () => {
                       {link.label}
                     </Link>
                   </NavigationMenuItem>
+                  )}
+
+                  </>
                 ))}
               </NavigationMenuList>
             </NavigationMenu>

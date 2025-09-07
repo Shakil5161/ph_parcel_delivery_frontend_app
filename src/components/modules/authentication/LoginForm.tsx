@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
 import { useForm, type FieldValues, type SubmitHandler } from "react-hook-form";
 import { Link, useNavigate } from "react-router";
+import { toast } from "sonner";
 
 
 export function LoginForm({
@@ -22,9 +23,23 @@ export function LoginForm({
             const res = await login(data).unwrap();
             console.log('login res', res)
             navigate("/")
-        } catch (error) {
+        } catch (error: any) {
             console.log(error, 'error')
 
+        if (error.data.message === "Password does not match") {
+            toast.error("Invalid credentials");
+        }
+        if (error.data.message === 'Email does not exist') {
+            toast.error('Email does not exist');
+        }
+        if (error.data.message === 'Incorrect password') {
+            toast.error('Incorrect password');
+        }
+
+        if (error.data.message === "User is not verified") {
+            toast.error("Your account is not verified");
+            navigate("/verify", { state: data.email });
+        }
 
         }
   };
@@ -91,14 +106,7 @@ export function LoginForm({
           </span>
         </div>
 
-        <Button
-        //   onClick={() => (window.location.href = `${config.baseUrl}/auth/google`)}
-          type="button"
-          variant="outline"
-          className="w-full cursor-pointer"
-        >
-          Login with Google
-        </Button>
+        
       </div>
       <div className="text-center text-sm">
         Don&apos;t have an account?{" "}

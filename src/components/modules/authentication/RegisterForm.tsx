@@ -1,10 +1,15 @@
+import Password from "@/components/Password";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { useRegisterMutation } from "@/redux/features/auth/auth.api";
+import { Role } from "@/types";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { toast } from "sonner";
 import z from "zod";
 
 const formSchema = z.object({
@@ -13,7 +18,10 @@ const formSchema = z.object({
   }),
   email: z.email(),
   password: z.string().min(8, { error: "Password is too short" }),
-  confirmPassword: z.string().min(8, { error: "Confirm Password is too short" })
+  confirmPassword: z.string().min(8, { error: "Confirm Password is too short" }),
+  role: z.nativeEnum(Role, {
+      error: "Role is required",
+    }),
 }).refine((data) => data.password === data.confirmPassword, {
   message: "Password don't match",
   path: ["confirmPassword"]
@@ -25,13 +33,16 @@ export function RegisterForm({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
 
+    const [ register ] = useRegisterMutation();
+    const navigate = useNavigate();
     const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       email: "",
       password: "",
-      confirmPassword: ""
+      confirmPassword: "",
+      role: Role.SENDERS
     }
   })
 
@@ -39,6 +50,21 @@ export function RegisterForm({
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     console.log('data', data)
 
+    const userInfo = {
+      name: data.name,
+      email: data.email,
+      password: data.password,
+      role: data.role
+    }
+
+    try {
+        const res = await register(userInfo).unwrap()
+        console.log("Registration res", res)
+        toast.success("User created successfully")
+        navigate('/')
+    } catch (error) {
+        console.log('error', error)
+    }
     
   }
 
@@ -95,7 +121,7 @@ export function RegisterForm({
               <FormLabel>Password</FormLabel>
               <FormControl>
                 {/* <Input type="password" placeholder="********" {...field} /> */}
-                {/* <Password {...field}/> */}
+                <Password {...field}/>
               </FormControl>
               <FormDescription className="sr-only"> 
                 This is your password field.
@@ -111,7 +137,7 @@ export function RegisterForm({
             <FormItem>
               <FormLabel>Confirm Password</FormLabel>
               <FormControl>
-                {/* <Password {...field}/> */}
+                <Password {...field}/>
               </FormControl>
               <FormDescription className="sr-only">
                 This is your confirm password field.
@@ -120,6 +146,31 @@ export function RegisterForm({
             </FormItem>
           )}
         />
+        <FormField
+                                control={form.control}
+                                name="role"
+                                render={({ field }) => (
+                                <FormItem>
+                                    <FormLabel>Select Role</FormLabel>
+                                    <Select onValueChange={field.onChange} value={field.value}>
+                                    <FormControl>
+                                        <SelectTrigger>
+                                        <SelectValue placeholder="Select Role" />
+                                        </SelectTrigger>
+                                    </FormControl>
+                                    <SelectContent>
+                                        
+                                      <SelectItem value={Role.RECEIVER}>Receiver</SelectItem>
+                                      <SelectItem value={Role.SENDERS}>Senders</SelectItem>
+                                      <SelectItem value={Role.RIDER}>Rider</SelectItem>
+                                       
+                                    </SelectContent>
+                                    </Select>
+                                    <FormMessage />
+                                </FormItem>
+                                )}
+                            />
+
         <Button type="submit" className="w-full">Submit</Button>
       </form>
     </Form>
@@ -130,13 +181,7 @@ export function RegisterForm({
           </span>
         </div>
 
-        <Button
-          type="button"
-          variant="outline"
-          className="w-full cursor-pointer"
-        >
-          Login with Google
-        </Button>
+        
       </div>
 
       <div className="text-center text-sm">

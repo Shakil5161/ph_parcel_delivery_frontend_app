@@ -16,7 +16,7 @@
 
 ### Live Links
 
-- **Front-end:** [https://gomoto-parcel-delivery.vercel.app/features](https://gomoto-parcel-delivery.vercel.app/features)
+- **Front-end:** [https://gomoto-parcel-delivery.vercel.app](https://gomoto-parcel-delivery.vercel.app)
 - **Back-end:** [https://assignment-5-parcel-delivery-api.vercel.app/](https://assignment-5-parcel-delivery-api.vercel.app/)
 
 ### Source Code

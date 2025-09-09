@@ -41,7 +41,6 @@ console.log(data, 'userData')
 const handleLogout = async () => {
   await logout(undefined)
   dispatch(authApi.util.resetApiState())
-  console.log(data, 'userData after logout')
 }
 
 

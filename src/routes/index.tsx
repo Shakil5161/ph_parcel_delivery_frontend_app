@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
     },
     {
         path: "/admin",
-        Component: withAuth(DashboardLayout, (role.SUPER_ADMIN as TRole|| role.ADMIN as TRole)),
+        Component: withAuth(DashboardLayout, [role.SUPER_ADMIN as TRole|| role.ADMIN as TRole]),
         children: [
             { 
                 index: true, 
@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
     },
     {
     path: "/user",
-    Component: withAuth(DashboardLayout, (role.SENDERS as TRole, role.RECEIVER as TRole)),
+    Component: withAuth(DashboardLayout, [role.SENDERS as TRole, role.RECEIVER as TRole]),
     children: [
             {
                 index: true,

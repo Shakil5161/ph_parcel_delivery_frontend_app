@@ -89,7 +89,7 @@ export function AddParcelForm() {
         if( isAdmin ){
           navigate("/admin/all-parcel")
         } else {
-          navigate("/user/all-parcel")
+          navigate("/user/my-parcel")
         }
         
     } catch (error) {
@@ -112,7 +112,7 @@ export function AddParcelForm() {
                 <FormItem>
                   <FormLabel>Parcel Name</FormLabel>
                   <FormControl>
-                    <Input required placeholder="Parcel Title" {...field} />
+                    <Input  placeholder="Parcel Title" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -214,7 +214,7 @@ export function AddParcelForm() {
                   <FormItem className="flex-1">
                     <FormLabel>Receiver Email</FormLabel>
                     <FormControl>
-                      <Input required type="email" placeholder="jon@gmail.com" {...field} />
+                      <Input  type="email" placeholder="jon@gmail.com" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -227,7 +227,7 @@ export function AddParcelForm() {
                   <FormItem className="flex-1">
                     <FormLabel>Receiver Name</FormLabel>
                     <FormControl>
-                      <Input required placeholder="Jon" {...field} />
+                      <Input  placeholder="Jon" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -243,7 +243,7 @@ export function AddParcelForm() {
                   <FormItem className="flex-1">
                     <FormLabel>Receiver Address</FormLabel>
                     <FormControl>
-                      <Input required placeholder="Dhaka" {...field} />
+                      <Input  placeholder="Dhaka" {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -258,7 +258,7 @@ export function AddParcelForm() {
         <FormLabel>Receiver Phone</FormLabel>
         <FormControl>
           <Input 
-            required 
+             
             type="tel" 
             placeholder="01641969790" 
             {...field} 

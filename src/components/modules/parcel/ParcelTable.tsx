@@ -110,7 +110,7 @@ type ParcelTableProps = {
 // Custom filter function for multi-column searching
 const multiColumnFilterFn: FilterFn<Item> = (row, columnId, filterValue) => {
   const searchableRowContent =
-        `${row.original.title} ${row.original.receiver?.email ?? ""}`.toLowerCase();
+        `${row.original.title} ${row.original.receiver?.email ?? ""} ${row.original.trackingId}`.toLowerCase();
   const searchTerm = (filterValue ?? "").toLowerCase()
   return searchableRowContent.includes(searchTerm)
   console.log(columnId)
@@ -171,6 +171,11 @@ const columns: ColumnDef<Item>[] = [
     
     size: 180,
   },
+  {
+    header: "Tracking-ID",
+    accessorKey: "trackingId",
+    size: 180,
+  },
     {
     header: "Status",
     accessorKey: "status",
@@ -224,7 +229,7 @@ const columns: ColumnDef<Item>[] = [
 ]
 
 export default function ParcelTable({ data, isLoading }: ParcelTableProps) {
-
+console.log("ata, isLoading ", data, isLoading )
   const id = useId()
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([])
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({})
@@ -542,8 +547,7 @@ export default function ParcelTable({ data, isLoading }: ParcelTableProps) {
           ) : (
             <TableRow>
               <TableCell colSpan={columns.length} className="h-24 text-center">
-                No results-{isLoading}.
-                <Skeleton className="h-4 w-32"/>
+                No results.
               </TableCell>
             </TableRow>
           )}

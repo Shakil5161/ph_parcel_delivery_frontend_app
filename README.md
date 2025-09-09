@@ -1,69 +1,43 @@
-# React + TypeScript + Vite
+## Project Overview
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**GOMOTO Parcel Delivery** is a full-stack web application designed to streamline parcel delivery management for senders, receivers, riders, and administrators. The platform enables users to create, track, and manage parcel requests, while providing robust admin and rider dashboards for efficient operations.
 
-Currently, two official plugins are available:
+### Core Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Role-based Authentication:** Supports Sender, Receiver, Rider, Admin, and SuperAdmin roles with protected routes and dashboards.
+- **Parcel Management:** Users can create, update, and track parcels. Admins can manage all parcels and users.
+- **Dashboard:** Custom dashboards for each role, showing relevant data and actions.
+- **Rider Assignment:** Admins can assign parcels to riders for delivery.
+- **Status Tracking:** Real-time parcel status updates and logs.
+- **Responsive UI:** Mobile-friendly design using React, TypeScript, and Tailwind CSS.
+- **RESTful API:** Secure backend with JWT authentication and cookie-based sessions.
+- **Error Handling:** User-friendly error messages and access control.
+- **Live Demo & Presentation:** Easily test with provided credentials and watch the video walkthrough.
 
-## Expanding the ESLint configuration
+### Live Links
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Front-end:** [https://gomoto-parcel-delivery.vercel.app/features](https://gomoto-parcel-delivery.vercel.app/features)
+- **Back-end:** [https://assignment-5-parcel-delivery-api.vercel.app/](https://assignment-5-parcel-delivery-api.vercel.app/)
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Source Code
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- **Front-end GitHub:** [https://github.com/Shakil5161/ph_parcel_delivery_frontend_app](https://github.com/Shakil5161/ph_parcel_delivery_frontend_app)
+- **Back-end GitHub:** [https://github.com/Shakil5161/ph_parcel_delivery_api](https://github.com/Shakil5161/ph_parcel_delivery_api)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Video Presentation
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- [Watch Demo](https://screenrec.com/share/hrFZTuwMSo)
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Test Credentials
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Sender**
+- Email: `safa2@gmail.com`
+- Password: `5161@Safa`
+
+**SuperAdmin**
+- Email: `super@gmail.com`
+- Password: `51613236`
+
+**Receiver**
+- Email: `siam@gmail.com`
+- Password: `123siam@gmail.com`
